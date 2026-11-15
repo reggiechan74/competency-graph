@@ -1,6 +1,6 @@
 {
   "name": "competency-graph",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Build and maintain a personal competency graph: what someone knows, the evidence that proves it, levels the evidence supports, professional frameworks, job specs and a claude.ai dashboard",
   "author": {
     "name": "Reggie Chan"

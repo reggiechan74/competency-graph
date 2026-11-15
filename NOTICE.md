@@ -12,7 +12,7 @@ The files are in `skills/competency-graph/assets/frameworks/`. `catalog.yaml` gi
 
 | Framework | Owner | What is included | Files |
 |---|---|---|---|
-| RICS Assessment of Professional Competence (APC) | Royal Institution of Chartered Surveyors | Pathway and competency names, required levels and selection rules from the December 2025 *Requirements and competencies* guide and the September 2026 *Data analytics and intelligence* pilot guide; some level descriptors from those guides, beside the author's own North American wording | `rics-apc.csv`, `rics-apc-descriptions.csv` |
+| RICS Assessment of Professional Competence (APC) | Royal Institution of Chartered Surveyors | Pathway and competency names, required levels and selection rules from the December 2025 *Requirements and competencies* guide and the September 2026 *Data analytics and intelligence* pilot guide. The descriptions and the wording of each level are the author's own, written for North American practice from the meaning of those guides and not copied from them | `rics-apc.csv`, `rics-apc-descriptions.csv` |
 | CFA Program Candidate Body of Knowledge (CBOK) | CFA Institute | Topic area names and structure from the published CBOK and 2027 curriculum topic weights. The descriptions and level wording are drafted for the graph | `cfa-cbok.csv`, `cfa-cbok-descriptions.csv` |
 | Six Sigma Green Belt Body of Knowledge (CSSGB) | ASQ | Section and topic names from the 2022 Body of Knowledge. The descriptions and level wording are drafted for the graph | `asq-cssgb.csv`, `asq-cssgb-descriptions.csv` |
 

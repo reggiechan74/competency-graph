@@ -97,7 +97,7 @@ Three things carry a version, and they move separately:
 
 | What | Version | Where it is recorded |
 |---|---|---|
-| This plugin | 0.1.0 | `.claude-plugin/plugin.json`, `CHANGELOG.md` |
+| This plugin | 0.1.1 | `.claude-plugin/plugin.json`, `CHANGELOG.md` |
 | The specification (the graph's fields and rules) | 0.5 | `references/specification.md` |
 | The dashboard page | 1.7.2 | `assets/dashboard/DESIGN.md` |
 
@@ -114,7 +114,7 @@ The dashboard page's tests need Node with jsdom, and Playwright with Chromium; e
 
 ## Status
 
-The method and the dashboard were built and proven on the author's own graph. The plugin is at 0.1.0: the first release outside that repository.
+The method and the dashboard were built and proven on the author's own graph. The plugin's first release outside that repository was 0.1.0; `CHANGELOG.md` lists what has changed since.
 
 ## Licence
 
