@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: starts-graph-from-cv-folder
+expected_outcome: |
+  A competency-graph.yaml at the vault root names the graph root and the profile, and a profile note is written inside the vault recording sources, conventions (the job files' dates and status fields), a Canadian industry classification and a 5-year stale threshold. Candidate skills are collected from the CV, job files, certifications and repo README with citations, and a small set (about 3-5) of discipline-named domains (not industries) are proposed with reasons for Tomas to approve, and the run stops there: no placements are drafted before he decides on the domains. No skill notes are created and the existing files' bodies are unchanged.
+context:
+  scaffold_script: place-files.sh

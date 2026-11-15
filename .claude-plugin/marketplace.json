@@ -1,0 +1,14 @@
+{
+  "name": "competency-graph",
+  "owner": {
+    "name": "Reggie Chan"
+  },
+  "plugins": [
+    {
+      "name": "competency-graph",
+      "version": "0.1.0",
+      "source": "./",
+      "description": "Build and maintain a personal competency graph: what someone knows, the evidence that proves it, levels the evidence supports, professional frameworks, job specs and a claude.ai dashboard"
+    }
+  ]
+}

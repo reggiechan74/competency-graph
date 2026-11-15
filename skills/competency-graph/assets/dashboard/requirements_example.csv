@@ -1,0 +1,9 @@
+framework,pathway,pathway_note,group,order,name,required,rule
+Example Institute,Chartered Analyst,qualified 2019,Mandatory,1,Ethics and professional conduct,L3,
+Example Institute,Chartered Analyst,qualified 2019,Mandatory,2,Client care,L2,
+Example Institute,Chartered Analyst,qualified 2019,Mandatory,3,Data management,L1,
+Example Institute,Chartered Analyst,qualified 2019,Core,1,Financial modelling,L2 or L3,"Two of these three to L3, one to L2"
+Example Institute,Chartered Analyst,qualified 2019,Core,2,Investment management,L2 or L3,"Two of these three to L3, one to L2"
+Example Institute,Chartered Analyst,qualified 2019,Core,3,Valuation,L2 or L3,"Two of these three to L3, one to L2"
+Example Institute,Chartered Analyst,qualified 2019,Optional,1,Capital taxation,choice,One to L3 and one to L2 from this list
+Example Institute,Chartered Analyst,qualified 2019,Optional,2,Property management,choice,One to L3 and one to L2 from this list

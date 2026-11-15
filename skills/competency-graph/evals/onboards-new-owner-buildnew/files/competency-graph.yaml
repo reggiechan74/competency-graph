@@ -1,0 +1,4 @@
+kgConfigVersion: 1
+graphRoot: Knowledge_Graph
+profile: Knowledge_Graph/Profile_Priya_Nair.md
+datedFilenames: true

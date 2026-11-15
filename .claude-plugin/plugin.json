@@ -1,0 +1,21 @@
+{
+  "name": "competency-graph",
+  "version": "0.1.0",
+  "description": "Build and maintain a personal competency graph: what someone knows, the evidence that proves it, levels the evidence supports, professional frameworks, job specs and a claude.ai dashboard",
+  "author": {
+    "name": "Reggie Chan"
+  },
+  "repository": "https://github.com/reggiechan74/competency-graph",
+  "license": "MIT",
+  "keywords": [
+    "competency",
+    "skills",
+    "taxonomy",
+    "evidence",
+    "career",
+    "cv",
+    "frameworks",
+    "dashboard",
+    "obsidian"
+  ]
+}

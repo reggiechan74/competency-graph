@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: adds-new-contract-safely
+expected_outcome: |
+  The Northshore file is tagged in place as an engagement evidence note (organization Northshore Water Authority, via Bluewave Staffing, utilities sector, on-request disclosure, period from the existing dates field) linked only to existing skills such as Hydraulic Modelling, EPANET, Python and Teaching & Training. Its body is unchanged, no new skill notes are created, a new SCADA-related skill is proposed for approval instead, and the graph checks with no errors.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,11 @@
+# Python and test caches
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# eval runs (written by `claude plugin eval` and the skill-creator harness)
+skills/competency-graph/evals/results/
+
+# packaged plugin files and OS clutter
+*.plugin
+.DS_Store

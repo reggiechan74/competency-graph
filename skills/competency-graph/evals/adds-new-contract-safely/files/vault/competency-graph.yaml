@@ -1,0 +1,21 @@
+# Where the competency-graph skill reads and writes files.
+# Every path is relative to this file's folder (the vault root), or absolute.
+# Graph notes (skills, sectors, evidence) must stay inside the vault; working,
+# reports and outputs may point anywhere. Delete a folder line to use its default.
+kgConfigVersion: 1
+graphRoot: Knowledge_Graph
+profile: Knowledge_Graph/Profile_Tomas_Varga.md
+folders:
+  # skill notes
+  skills: Knowledge_Graph/Skills
+  # sector notes
+  sectors: Knowledge_Graph/Sectors
+  # new evidence notes (Projects/, Credentials/, Publications/, Engagements/)
+  evidence: Knowledge_Graph/Evidence
+  # placement proposals, pass-test notes, rating worksheets
+  working: Knowledge_Graph/Working
+  # checker reports and JSON exports
+  reports: Knowledge_Graph/Working
+  # things made for a reader: requirement tables, evidence packs, CV material
+  outputs: Knowledge_Graph/Outputs
+datedFilenames: true    # prefix files Claude names itself with YYYY-MM-DD_

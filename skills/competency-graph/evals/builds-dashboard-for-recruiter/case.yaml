@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: builds-dashboard-for-recruiter
+expected_outcome: |
+  The summary data files (domains, competencies, timeline, sectors) are generated at on-request disclosure (never confidential) and saved, with the dashboard page, in the outputs folder the vault's competency-graph.yaml names (Applications/). The page is the skill's dashboard template adapted for Tomás (his name in the title; the framework section removed or left for a requirements file, since he has no framework requirements), keeping the Claimed dropdowns and the Save toolbar. Nothing is published. The reply explains the remaining steps (create a Dashboard-type artifact, upload the files, write the datasets and page) and warns that anyone who can open the dashboard can read the attached data files. The vault's v0.3 `skill` notes and `skills` config key still work.
+context:
+  scaffold_script: place-files.sh

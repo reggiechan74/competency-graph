@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: onboards-new-owner-buildnew
+expected_outcome: |
+  Invoked with --buildnew, the skill treats Sam as a new owner. The competency-graph.yaml found in the workspace root belongs to another owner (Priya) and is neither used nor changed; Claude says so and notes that Sam's vault sits inside hers. Sam's own sam/competency-graph.yaml puts the graph in Graph/ and outputs in Applications/, and lists his records under sources: ResumeSource (collect) and Jobs (evidence or collect), with Private ignored or left out and never read. A profile is written at the configured path with a Sources table matching the config. kg_config.py show is run for Sam's vault. No competency notes are created and Sam's existing files are unchanged.
+context:
+  scaffold_script: place-files.sh

@@ -1,0 +1,122 @@
+# Preconfigured competency frameworks (spec §3.8). Each file states every pathway's requirements on this graph's
+# L1-L4 scale; the `levels` line says how the framework's own levels were mapped. An owner selects frameworks and
+# pathways in competency-graph.yaml (`frameworks:`), and `frameworks.py build` writes their requirements file.
+# Re-check a framework against its current published guide before relying on it: bodies revise them every few years.
+# `guide` (optional) names a file beside the requirements that says what each level looks like, for rating against it.
+# A requirements file may have a `subgroup` column: a sub-group inside a group (chan-afse.csv, chan-agen.csv and chan-cxmds.csv
+# list their Optional competencies by specialisation). The group's rule still covers the whole group; the dashboard heads each sub-group.
+# `descriptions` (optional) names a CSV (framework, name, description, l1-l4, source): one row per competency, a general
+# description and what each of L1-L4 means, shown on the dashboard's Competency definitions tab. `source` says where each
+# part came from; text drafted for the graph (an L4 beyond a body's own scale, say) is marked as such.
+# `field` (optional) names the area of practice a framework belongs to. Frameworks in one field are pathways of it and list
+# the same Mandatory competencies; Core is the baseline of one pathway only (references/domains-and-classifications.md §6).
+# `status: draft` (optional) marks a framework that has not passed review: `list` says so with the `status_note`, and
+# Claude says so before offering it to an owner. Omitted means released.
+frameworks:
+  rics-apc:
+    framework: RICS APC                  # the `framework` value in the file, and the externalRef prefix
+    title: RICS Assessment of Professional Competence
+    body: Royal Institution of Chartered Surveyors
+    edition: "December 2025 guides (Data analytics and intelligence: pilot, September 2026)"
+    file: rics-apc.csv                   # rules are the guides' words; where the guide breaks a line ("Plus, ...", a footnote), the copy has a full stop
+    descriptions: rics-apc-descriptions.csv
+    levels: "RICS levels 1-3 (knowledge, application, reasoned advice) = L1-L3; L4 is beyond the APC"
+    sources:
+      - https://www.rics.org/content/dam/ricsglobal/documents/join-rics/Requirements-and-competencies_December-2025.pdf
+      - https://www.rics.org/content/dam/ricsglobal/documents/join-rics/Data-analytics-and-intelligence_September-2026.pdf
+  cfa-cbok:
+    framework: CFA CBOK
+    title: CFA Program Candidate Body of Knowledge
+    body: CFA Institute
+    edition: 2027 curriculum topic weights
+    file: cfa-cbok.csv
+    descriptions: cfa-cbok-descriptions.csv
+    levels: "Every topic examined at Levels I-III = L1 (the charter is knowledge evidence); Level III pathway topics = L1, evidenced by work"
+    sources:
+      - https://www.cfainstitute.org/programs/cfa-program/candidate-resources/cbok
+  asq-cssgb:
+    framework: ASQ CSSGB
+    title: Six Sigma Green Belt Body of Knowledge
+    body: ASQ
+    edition: 2022 Body of Knowledge
+    file: asq-cssgb.csv
+    descriptions: asq-cssgb-descriptions.csv
+    levels: "Belts by role: Yellow L1, Green L2, Black L3, Master Black L4. Green Belt sections L2; L1 where the BoK asks only to understand"
+    sources:
+      - https://www.asq.org/cert/resource/pdf/certification/cssgb-cert-insert.pdf
+  chan-afse:
+    framework: Chan AFSE
+    title: Agentic Full-Stack Engineer Framework
+    body: Reggie Chan
+    field: agentic
+    edition: 2026.6 (November 2026)
+    status: draft
+    status_note: "Edition 2026.6 (2026-11-14) gave the agentic field one Mandatory list, shared with Chan AGEN; 2026.5 reworded 16 cells from published sources (SFIA 9 and others); 2026.4 added 16 competencies, a fourth specialisation (Forward-deployed delivery) and three job specs. None of it has had an outside review"
+    file: chan-afse.csv
+    descriptions: chan-afse-descriptions.csv
+    guide: chan-afse.md                  # what the evidence must show at each level, per competency
+    levels: "Native L1-L4 (designed on this scale). One pathway: Mandatory (five, shared by every pathway in the agentic field) at fixed levels (L1-L2), Core (the full-stack tier) at L2, and six Optional of the person's choice from the agentic tier (three to L3, three to L2), listed in four specialisations. Every L3 needs evidence of guiding others; every L4 adoption or recognition beyond the person's own team"
+    sources:
+      - chan-afse.md (the framework itself, with the L1-L4 descriptors, three roles as job specs and the changes in each edition)
+      - https://openai.com/careers/forward-deployed-engineer-(fde)-sf-san-francisco/
+      - https://openai.com/careers/forward-deployed-software-engineer-nyc-new-york-city/
+      - https://jobs.lever.co/palantir/8148182c-6127-4689-b615-7815a94173bb
+      - https://learn.microsoft.com/en-us/credentials/certifications/resources/study-guides/ab-100
+      - https://www.anthropic.com/research/building-effective-agents
+      - https://sfia-online.org/en/sfia-9/skills
+      - https://job-boards.greenhouse.io/anthropic/jobs/5423029008
+      - https://sre.google/sre-book/managing-incidents/
+      - https://csed.acm.org/
+      - https://a16z.com/services-led-growth/
+  chan-agen:
+    framework: Chan AGEN
+    title: Agentic Genealogy Framework
+    body: Reggie Chan
+    field: agentic
+    edition: 2026.6 (November 2026)
+    status: draft
+    status_note: "Revised after an adversarial review (2026-11-10); regrouped as one pathway (2026-11-13), not yet re-reviewed. Tier C is provisional and was derived mainly from the author's own project; needs outside practitioner review before other owners rely on it. Edition 2026.5 (2026-11-14) took BCG's rubric wording at L2 and checked three unverified claims; 2026.6 gave the agentic field one Mandatory list, shared with Chan AFSE"
+    file: chan-agen.csv
+    descriptions: chan-agen-descriptions.csv
+    guide: chan-agen.md                  # what the evidence must show at each level, per competency
+    levels: "Native L1-L4 (designed on this scale). One pathway: Mandatory (five, shared by every pathway in the agentic field) at fixed levels (L1-L2), Core at L2, and six Optional of the person's choice (three to L3, three to L2), listed in four specialisations. L4 needs recognition outside the person's own work"
+    sources:
+      - chan-agen.md (the framework itself, with the L1-L4 descriptors, how it was built and its limits)
+      - https://bcgcertification.org/ethics-standards/
+      - https://bcgcertification.org/bcg-ai-portfolio
+      - https://bcgcertification.org/become-a-certified-genealogist
+      - https://bcgcertification.org/new-cgg-credential-feb-2024
+      - https://www.icapgen.org/
+      - https://www.qualifiedgenealogists.org/the-recognition-standard-and-accepted-qualifications
+      - https://craigen.org/
+      - https://craigen.org/protecting-trust-in-historical-images/
+      - https://evidenceexplained.com/node/178
+      - "Mills, QuickSheet: The Historical Biographer's Guide to Cluster Research (the FAN Principle), 2012"
+      - "Keats-Rohan (ed.), Prosopography Approaches and Applications: A Handbook, 2007"
+      - https://www.canada.ca/en/library-archives/services/publishers/isbn/about.html
+      - https://www.ngsgenealogy.org/wp-content/uploads/2026/01/Responsible-Use-of-AI.pdf
+      - https://gedcom.io/specifications/FamilySearchGEDCOMv7.html
+      - https://www.bcgcertification.org/images/files/BCG-New-Application-Rubrics.pdf
+      - https://icapgen.org/wp-content/uploads/Guide-to-Applying-for-AG-Credential.pdf
+      - https://www.agra.org.uk/join-member-notes
+      - https://genealogy.org.nz/Ethics--Best-Practice-of-AI/11482/
+      - https://grip.ngsgenealogy.org/courses/practical-ai-for-genealogists-foundations-and-first-steps-2/
+      - https://help.transkribus.org/data-preparation
+      - https://arxiv.org/abs/2607.24077
+      - https://arxiv.org/abs/2411.03340
+  chan-cxmds:
+    framework: Chan CXMDS
+    title: Customer Experience and Managed Data Services Framework
+    body: Reggie Chan
+    edition: 2026.3 (November 2026)
+    status: draft
+    status_note: "Revised after an adversarial review (2026-11-10); regrouped as one pathway (2026-11-14), not yet re-reviewed. Built from one person's own role; needs outside practitioner review before other owners rely on it"
+    file: chan-cxmds.csv
+    descriptions: chan-cxmds-descriptions.csv
+    guide: chan-cxmds.md                 # what the evidence must show at each level, per competency
+    levels: "Native L1-L4 (designed on this scale). One pathway: Mandatory at fixed levels (L1-L2), Core at L2, and six Optional of the person's choice (three to L3, three to L2), listed in three specialisations. Every L3 needs evidence of guiding others"
+    sources:
+      - chan-cxmds.md (the framework itself, with the L1-L4 descriptors and its external references)
+      - https://sfia-online.org/en/sfia-9/all-skills-a-z
+      - https://cxpaglobal.org/get-certified/prep-resources
+      - https://dama.org/dama-dmbok-revision/
