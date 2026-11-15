@@ -43,13 +43,15 @@ The page works from full width down to a phone or a narrow pane beside a chat (a
 
 ## Page versions
 
-The page has a version of its own, apart from the specification's and from anything claude.ai counts. It is written once, in the template's header (`<p class="sp-version" id="page-version">Version X.Y.Z</p>`), so every owner's dashboard shows which release of the page it was built from; `dashboard_build.py` reads it into the manifest (`pageVersion`), prints it, and stops if the template shows none. It is not one of the owner's settings and has no `kg:` marker.
+The page and the plugin share one version number, apart from the specification's and from anything claude.ai counts. On the page it is written once, in the template's header (`<p class="sp-version" id="page-version">Version X.Y.Z</p>`), so every owner's dashboard shows which release of the plugin built it; `dashboard_build.py` reads it into the manifest (`pageVersion`), prints it, and stops if the template shows none. It is not one of the owner's settings and has no `kg:` marker.
 
-Change the number in the same commit as the page, and add a line here, newest first (`test_dashboard.py` checks that the newest line is the template's number):
+The same number is in the plugin's manifests (`.claude-plugin/plugin.json`, `marketplace.json`), at the head of the plugin's `CHANGELOG.md`, in the README's badge and table, and on the release's git tag (`vX.Y.Z`). `tools/bump_version.py X.Y.Z "What changed."` writes it in all of them, with `--page "…"` for what changed on the page; `test_versions.py` fails if any two disagree. Until 2026-11-15 the page was numbered alone and the plugin separately (0.1.0, 0.1.1); the plugin took the page's number at 1.7.2.
 
-- **Patch** (1.0.x): a fix or a rewording that changes nothing a reader does.
-- **Minor** (1.x.0): something new to see or use: a tab, a card, a column, a control.
-- **Major** (x.0.0): the page needs data files or store documents in a new shape, so a dashboard must be rebuilt and its saved changes applied first.
+So the number moves with every release, whether or not the page changed. Add a line here for each, newest first (`test_dashboard.py` checks that the newest line is the template's number); a release that leaves the page as it was says so in its line. What changed outside the page is in `CHANGELOG.md`.
+
+- **Patch** (1.0.x): a fix or a rewording that changes nothing a reader or an owner does, on the page or in the skill, its scripts or its library.
+- **Minor** (1.x.0): something new to see or use: a tab, a card, a column or a control on the page; a script, a command, a framework or a field in the skill.
+- **Major** (x.0.0): data files, store documents, settings or notes in a new shape, so a dashboard must be rebuilt and its saved changes applied first, or an owner's files migrated.
 
 - **1.7.2** (2026-11-15): a rewording. On Domains across industries the column for units with no sector is headed "Own work & credentials", not "No sector", which read as a gap in the record; the card's note and General definitions say what it holds, and the units table says "None" under Sector. The data files still say "No sector". The room kept at the grid's right for the last angled names is measured until they fit: one pass left a long last name a few pixels over the card's edge, where it faded.
 - **1.7.1** (2026-11-15): a fix. On the rating fit chart, a bar's end label with both marks ("51 ▲7 ▼3") ran 10px past the chart's right edge when the longest bar carried it; the room kept for the label is now its drawn width. Found by the dashboard's own check (`labels_cut`) once a domain split made such a bar the longest.

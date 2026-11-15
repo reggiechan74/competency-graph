@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "competency-graph",
-      "version": "0.1.1",
+      "version": "1.7.2",
       "source": "./",
       "description": "Build and maintain a personal competency graph: what someone knows, the evidence that proves it, levels the evidence supports, professional frameworks, job specs and a claude.ai dashboard"
     }

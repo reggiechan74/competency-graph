@@ -1,6 +1,12 @@
 # Changelog
 
-Changes to the plugin. The specification and the dashboard page keep their own histories (`references/specification.md`, `assets/dashboard/DESIGN.md`).
+Changes to the plugin, newest first. The plugin and its dashboard page share one version number; what changed on the page itself is also listed in `skills/competency-graph/assets/dashboard/DESIGN.md`. The specification keeps its own history in `references/specification.md`.
+
+## 1.7.2 (2026-11-15)
+
+- **One version number.** The plugin takes the dashboard page's number, so the version a dashboard shows is the release of the plugin that built it. `tools/bump_version.py` writes the number everywhere it appears, a test fails if any two places disagree, and each release is tagged `vX.Y.Z` on GitHub. The page itself is unchanged from 1.7.2.
+- **README:** a *How it works* section with the dashboard's own six drawings (exported by `tools/export_figures.py`, in light and dark), and badges.
+- Everything listed under 0.1.1 and 0.1.0 below, which were the plugin's numbers before it shared the page's.
 
 ## 0.1.1 (2026-11-15)
 

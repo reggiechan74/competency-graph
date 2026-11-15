@@ -1,5 +1,13 @@
 # competency-graph
 
+[![Version](https://img.shields.io/badge/Version-1.7.2-FF6B35)](CHANGELOG.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Specification](https://img.shields.io/badge/Specification-v0.5-8B5CF6)](skills/competency-graph/references/specification.md)
+[![Frameworks](https://img.shields.io/badge/Frameworks-6-E879F9)](skills/competency-graph/assets/frameworks/)
+[![Tests](https://img.shields.io/badge/Tests-239-2EA043)](skills/competency-graph/scripts/tests/)
+[![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-F97316?logo=anthropic&logoColor=white)](https://claude.ai/code)
+
 A Claude Code plugin that helps one person build and keep a **competency graph**: what they know, and the evidence that proves it.
 
 The graph is a folder of plain markdown notes that the owner controls (an Obsidian vault or any folder, often a git repository). Claude proposes, the owner decides, and every claim can be traced back to a job, a project, a credential or another record the owner already has.
@@ -198,13 +206,14 @@ The first three are drawn from those bodies' published guides, which remain thei
 
 ## Versions
 
-Three things carry a version, and they move separately:
+The plugin and the dashboard page it builds share one version number, so the number at the top right of a dashboard says which release of the plugin built it. Each release is tagged `vX.Y.Z` on GitHub.
 
 | What | Version | Where it is recorded |
 |---|---|---|
-| This plugin | 0.1.1 | `.claude-plugin/plugin.json`, `CHANGELOG.md` |
-| The specification (the graph's fields and rules) | 0.5 | `references/specification.md` |
-| The dashboard page | 1.7.2 | `assets/dashboard/DESIGN.md` |
+| The plugin and its dashboard page | 1.7.2 | `CHANGELOG.md`; the page's own history is in `assets/dashboard/DESIGN.md` |
+| The specification (the graph's fields and rules) | 0.5 | `references/specification.md`, and `kgSpecVersion` in each owner's profile |
+
+The specification keeps its own number because it versions the owner's notes, not the software: a graph written to 0.5 stays valid through plugin releases that do not change the format.
 
 ## Development
 
@@ -219,9 +228,13 @@ The dashboard page's tests need Node with jsdom, and Playwright with Chromium; e
 
 The drawings in this README are exported from the dashboard page, where they are drawn once. After changing one there, run `python3 tools/export_figures.py` to rewrite `docs/images/` (`--check` exits 1 if the files are out of date).
 
+### Releasing
+
+`python3 tools/bump_version.py X.Y.Z "What changed."` writes the new number everywhere it appears: the dashboard page, both plugin manifests, the changelog, the page's history and this README's badges and table. Add `--page "What changed on the page."` when the page itself changed. Then run the tests, commit, tag `vX.Y.Z`, push with the tag and create the GitHub release. `--check` exits 1 if the places disagree, and a test does the same.
+
 ## Status
 
-The method and the dashboard were built and proven on the author's own graph. The plugin's first release outside that repository was 0.1.0; `CHANGELOG.md` lists what has changed since.
+The method and the dashboard were built and proven on the author's own graph before the plugin was released. `CHANGELOG.md` lists what has changed since.
 
 ## Licence
 
