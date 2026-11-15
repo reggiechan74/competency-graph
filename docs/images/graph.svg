@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 752 306" width="752" height="306" role="img" aria-label="A small competency graph. Lease negotiation is a specialisation of Leasing, which is a specialisation of the Real property domain, each joined by a broader link. A tool, Lease software, is related to Leasing. A role as leasing manager demonstrates Leasing and sits in the Real estate sector. A project that is part of that role demonstrates Lease negotiation as led work. Leasing names a framework competency, Leasing/letting, which is a row in a framework’s file and not a note.">
+  <title>A small competency graph. Lease negotiation is a specialisation of Leasing, which is a specialisation of the Real property domain, each joined by a broader link. A tool, Lease software, is related to Leasing. A role as leasing manager demonstrates Leasing and sits in the Real estate sector. A project that is part of that role demonstrates Lease negotiation as led work. Leasing names a framework competency, Leasing/letting, which is a row in a framework’s file and not a note.</title>
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: #1f2328; }
+  text.m { fill: #59636e; font-size: 11.5px; }
+  text.k { fill: #59636e; font-size: 9.5px; letter-spacing: .06em; }
+  .b { fill: #1f2328; font-weight: 600; }
+  .n { fill: #f3f4f6; stroke: #1f2328; stroke-width: 1; }
+  .n.i { fill: #ffffff; stroke: #59636e; }
+  .n.q { fill: none; stroke: #59636e; stroke-dasharray: 4 3; }
+  .z { fill: none; stroke: #d1d9e0; stroke-width: 1.5; }
+  .e { fill: none; stroke: #1f2328; stroke-width: 1.25; }
+  .e.q { stroke-dasharray: 4 3; }
+  .h { fill: #1f2328; }
+  </style>
+  <rect x="-15.5" y="-15.5" width="751" height="305" rx="8" fill="#ffffff" stroke="#d1d9e0"/>
+  <text x="12" y="22" class="k">A FRAMEWORK’S FILE</text>
+  <text x="260" y="22" class="k">COMPETENCIES</text>
+  <text x="514" y="22" class="k">SECTORS AND EVIDENCE</text>
+  <rect class="n" x="260" y="36" width="140" height="48" rx="6"/>
+  <text x="270" y="53" class="k">DOMAIN</text>
+  <text x="270" y="71" class="b">Real property</text>
+  <rect class="n" x="260" y="124" width="140" height="48" rx="6"/>
+  <text x="270" y="141" class="k">DISCIPLINE</text>
+  <text x="270" y="159" class="b">Leasing</text>
+  <rect class="n" x="260" y="212" width="140" height="48" rx="6"/>
+  <text x="270" y="229" class="k">SPECIALTY</text>
+  <text x="270" y="247" class="b">Lease negotiation</text>
+  <rect class="n q" x="12" y="124" width="170" height="48" rx="6"/>
+  <text x="22" y="141" class="k">FRAMEWORK COMPETENCY</text>
+  <text x="22" y="159" class="b">Leasing/letting</text>
+  <rect class="n" x="12" y="212" width="170" height="48" rx="6"/>
+  <text x="22" y="229" class="k">TOOL</text>
+  <text x="22" y="247" class="b">Lease software</text>
+  <rect class="n" x="514" y="36" width="194" height="48" rx="24"/>
+  <text x="538" y="53" class="k">SECTOR</text>
+  <text x="538" y="71" class="b">Real estate</text>
+  <rect class="n" x="514" y="124" width="194" height="48" rx="6"/>
+  <text x="524" y="141" class="k">EVIDENCE: ROLE, 2015–2021</text>
+  <text x="524" y="159" class="b">Leasing manager</text>
+  <rect class="n" x="514" y="212" width="194" height="48" rx="6"/>
+  <text x="524" y="229" class="k">EVIDENCE: PROJECT, 2019</text>
+  <text x="524" y="247" class="b">Head-office renewal</text>
+  <polyline class="e" points="330,212 330,180"/>
+  <polygon class="h" points="330,172 334,181 326,181"/>
+  <text x="338" y="197" class="m">broader</text>
+  <polyline class="e" points="330,124 330,92"/>
+  <polygon class="h" points="330,84 334,93 326,93"/>
+  <text x="338" y="109" class="m">broader</text>
+  <polyline class="e q" points="260,142 190,142"/>
+  <polygon class="h" points="182,142 191,138 191,146"/>
+  <text x="221" y="134" class="m" text-anchor="middle">externalRef</text>
+  <polyline class="e" points="182,236 221,236 221,160 252,160"/>
+  <polygon class="h" points="260,160 251,164 251,156"/>
+  <text x="213" y="197" class="m" text-anchor="end">related</text>
+  <polyline class="e" points="514,148 408,148"/>
+  <polygon class="h" points="400,148 409,144 409,152"/>
+  <text x="457" y="140" class="m" text-anchor="middle">demonstrates</text>
+  <polyline class="e" points="514,236 408,236"/>
+  <polygon class="h" points="400,236 409,232 409,240"/>
+  <text x="457" y="228" class="m" text-anchor="middle">demonstratesLed</text>
+  <polyline class="e" points="574,212 574,180"/>
+  <polygon class="h" points="574,172 578,181 570,181"/>
+  <text x="582" y="197" class="m">partOf</text>
+  <polyline class="e" points="574,124 574,92"/>
+  <polygon class="h" points="574,84 578,93 570,93"/>
+  <text x="582" y="109" class="m">sector</text>
+</svg>

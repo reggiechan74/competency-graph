@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 752 204" width="752" height="204" role="img" aria-label="Two personal competencies in the owner’s graph, Leasing claimed at L3 and Lease negotiation at L2, each name the framework competency Leasing/letting, which a framework’s files define with wording for L1 to L4. A pathway lists that framework competency and requires L3; a job spec lists it as Core and requires L2.">
+  <title>Two personal competencies in the owner’s graph, Leasing claimed at L3 and Lease negotiation at L2, each name the framework competency Leasing/letting, which a framework’s files define with wording for L1 to L4. A pathway lists that framework competency and requires L3; a job spec lists it as Core and requires L2.</title>
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: #1f2328; }
+  text.m { fill: #59636e; font-size: 11.5px; }
+  text.k { fill: #59636e; font-size: 9.5px; letter-spacing: .06em; }
+  .b { fill: #1f2328; font-weight: 600; }
+  .n { fill: #f3f4f6; stroke: #1f2328; stroke-width: 1; }
+  .n.i { fill: #ffffff; stroke: #59636e; }
+  .n.q { fill: none; stroke: #59636e; stroke-dasharray: 4 3; }
+  .z { fill: none; stroke: #d1d9e0; stroke-width: 1.5; }
+  .e { fill: none; stroke: #1f2328; stroke-width: 1.25; }
+  .e.q { stroke-dasharray: 4 3; }
+  .h { fill: #1f2328; }
+  </style>
+  <rect x="-15.5" y="-15.5" width="751" height="203" rx="8" fill="#ffffff" stroke="#d1d9e0"/>
+  <text x="12" y="22" class="k">THE OWNER’S GRAPH</text>
+  <text x="280" y="22" class="k">A FRAMEWORK’S FILES</text>
+  <text x="548" y="22" class="k">WHAT ASKS FOR IT</text>
+  <rect class="n" x="12" y="36" width="190" height="48" rx="6"/>
+  <text x="22" y="53" class="k">PERSONAL COMPETENCY</text>
+  <text x="22" y="71" class="b">Leasing: L3 claimed</text>
+  <rect class="n" x="12" y="112" width="190" height="48" rx="6"/>
+  <text x="22" y="129" class="k">PERSONAL COMPETENCY</text>
+  <text x="22" y="147" class="b">Lease negotiation: L2</text>
+  <rect class="n q" x="280" y="66" width="190" height="64" rx="6"/>
+  <text x="290" y="83" class="k">FRAMEWORK COMPETENCY</text>
+  <text x="290" y="101" class="b">Leasing/letting</text>
+  <text x="290" y="117" class="m">with wording for L1 to L4</text>
+  <rect class="n" x="548" y="36" width="160" height="48" rx="6"/>
+  <text x="558" y="53" class="k">A PATHWAY</text>
+  <text x="558" y="71" class="b">requires L3</text>
+  <rect class="n" x="548" y="112" width="160" height="48" rx="6"/>
+  <text x="558" y="129" class="k">A JOB SPEC: CORE</text>
+  <text x="558" y="147" class="b">requires L2</text>
+  <polyline class="e q" points="202,60 272.5,85.3"/>
+  <polygon class="h" points="280,88 270.2,88.7 272.9,81.2"/>
+  <text x="210" y="53" class="m">externalRef</text>
+  <polyline class="e q" points="202,136 272.5,110.7"/>
+  <polygon class="h" points="280,108 272.9,114.8 270.2,107.3"/>
+  <text x="210" y="152" class="m">externalRef</text>
+  <polyline class="e" points="548,60 477.5,85.3"/>
+  <polygon class="h" points="470,88 477.1,81.2 479.8,88.7"/>
+  <text x="540" y="53" class="m" text-anchor="end">lists</text>
+  <polyline class="e" points="548,136 477.5,110.7"/>
+  <polygon class="h" points="470,108 479.8,107.3 477.1,114.8"/>
+  <text x="540" y="152" class="m" text-anchor="end">lists</text>
+</svg>

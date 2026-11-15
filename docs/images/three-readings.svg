@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 752 316" width="752" height="316" role="img" aria-label="Three readings of one competency. The owner claims L3 Advanced, which is stored in the note. Two assessors rate it, Dana Okafor at L3 and Bo Manager at L2; the assessed level is the lowest of their ratings, L2 Practitioner, and the assessors differ by one level. The evidence, through the level rule, supports L2 Practitioner. The page sets the three levels side by side, and a job spec is scored on each.">
+  <title>Three readings of one competency. The owner claims L3 Advanced, which is stored in the note. Two assessors rate it, Dana Okafor at L3 and Bo Manager at L2; the assessed level is the lowest of their ratings, L2 Practitioner, and the assessors differ by one level. The evidence, through the level rule, supports L2 Practitioner. The page sets the three levels side by side, and a job spec is scored on each.</title>
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: #1f2328; }
+  text.m { fill: #59636e; font-size: 11.5px; }
+  text.k { fill: #59636e; font-size: 9.5px; letter-spacing: .06em; }
+  .b { fill: #1f2328; font-weight: 600; }
+  .n { fill: #f3f4f6; stroke: #1f2328; stroke-width: 1; }
+  .n.i { fill: #ffffff; stroke: #59636e; }
+  .n.q { fill: none; stroke: #59636e; stroke-dasharray: 4 3; }
+  .z { fill: none; stroke: #d1d9e0; stroke-width: 1.5; }
+  .e { fill: none; stroke: #1f2328; stroke-width: 1.25; }
+  .e.q { stroke-dasharray: 4 3; }
+  .h { fill: #1f2328; }
+  </style>
+  <rect x="-15.5" y="-15.5" width="751" height="315" rx="8" fill="#ffffff" stroke="#d1d9e0"/>
+  <text x="12" y="22" class="k">WHO SAYS IT</text>
+  <text x="330" y="22" class="k">THE LEVEL</text>
+  <rect class="n" x="12" y="36" width="210" height="48" rx="6"/>
+  <text x="22" y="53" class="k">THE OWNER</text>
+  <text x="22" y="71" class="b">claims L3 Advanced</text>
+  <rect class="n" x="12" y="100" width="210" height="48" rx="6"/>
+  <text x="22" y="117" class="k">ASSESSOR: COUNSELLOR</text>
+  <text x="22" y="135" class="b">Dana Okafor rates L3</text>
+  <rect class="n" x="12" y="154" width="210" height="48" rx="6"/>
+  <text x="22" y="171" class="k">ASSESSOR: SUPERVISOR</text>
+  <text x="22" y="189" class="b">Bo Manager rates L2</text>
+  <rect class="n" x="12" y="222" width="210" height="48" rx="6"/>
+  <text x="22" y="239" class="k">THE EVIDENCE</text>
+  <text x="22" y="257" class="b">units, months, years led</text>
+  <rect class="n" x="330" y="36" width="190" height="48" rx="6"/>
+  <text x="340" y="53" class="k">CLAIMED, STORED</text>
+  <text x="340" y="71" class="b">L3 Advanced</text>
+  <rect class="n q" x="330" y="127" width="190" height="48" rx="6"/>
+  <text x="340" y="144" class="k">ASSESSED</text>
+  <text x="340" y="162" class="b">L2 Practitioner</text>
+  <polygon class="h" points="334,182 338,187.5 330,187.5"/>
+  <polygon class="h" points="334,195 338,189.5 330,189.5"/>
+  <text x="342" y="193" class="b">1</text>
+  <text x="354" y="193" class="m">the assessors differ</text>
+  <rect class="n q" x="330" y="222" width="190" height="48" rx="6"/>
+  <text x="340" y="239" class="k">SUPPORTED</text>
+  <text x="340" y="257" class="b">L2 Practitioner</text>
+  <polyline class="e" points="222,60 322,60"/>
+  <polygon class="h" points="330,60 321,64 321,56"/>
+  <text x="276" y="52" class="m" text-anchor="middle">claims</text>
+  <polyline class="e" points="222,124 252,124"/>
+  <polyline class="e" points="222,178 252,178"/>
+  <polyline class="e" points="252,124 252,178"/>
+  <polyline class="e" points="252,151 322,151"/>
+  <polygon class="h" points="330,151 321,155 321,147"/>
+  <text x="291" y="143" class="m" text-anchor="middle">the lowest</text>
+  <polyline class="e" points="222,246 322,246"/>
+  <polygon class="h" points="330,246 321,250 321,242"/>
+  <text x="276" y="238" class="m" text-anchor="middle">level rule</text>
+  <polyline class="e" points="520,60 556,60"/>
+  <polyline class="e" points="520,151 556,151"/>
+  <polyline class="e" points="520,246 556,246"/>
+  <polyline class="e" points="556,60 556,246"/>
+  <polyline class="e" points="556,151 582,151"/>
+  <polygon class="h" points="590,151 581,155 581,147"/>
+  <rect class="n" x="590" y="108" width="118" height="86" rx="6"/>
+  <text x="600" y="129" class="b">On the page</text>
+  <text x="600" y="145" class="m">side by side;</text>
+  <text x="600" y="159" class="m">a job spec is</text>
+  <text x="600" y="173" class="m">scored on each</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 752 424" width="752" height="424" role="img" aria-label="The loop between the three parts. In the owner’s own folder, Claude turns the owner’s records into graph notes, each placement approved by the owner. Scripts check and count the notes and build this page and its data files, a snapshot. A level or job spec changed and saved on the page waits in the dashboard’s database until Claude exports it and the link editor writes it into the notes.">
+  <title>The loop between the three parts. In the owner’s own folder, Claude turns the owner’s records into graph notes, each placement approved by the owner. Scripts check and count the notes and build this page and its data files, a snapshot. A level or job spec changed and saved on the page waits in the dashboard’s database until Claude exports it and the link editor writes it into the notes.</title>
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: #1f2328; }
+  text.m { fill: #59636e; font-size: 11.5px; }
+  text.k { fill: #59636e; font-size: 9.5px; letter-spacing: .06em; }
+  .b { fill: #1f2328; font-weight: 600; }
+  .n { fill: #f3f4f6; stroke: #1f2328; stroke-width: 1; }
+  .n.i { fill: #ffffff; stroke: #59636e; }
+  .n.q { fill: none; stroke: #59636e; stroke-dasharray: 4 3; }
+  .z { fill: none; stroke: #d1d9e0; stroke-width: 1.5; }
+  .e { fill: none; stroke: #1f2328; stroke-width: 1.25; }
+  .e.q { stroke-dasharray: 4 3; }
+  .h { fill: #1f2328; }
+  </style>
+  <rect x="-15.5" y="-15.5" width="751" height="423" rx="8" fill="#ffffff" stroke="#d1d9e0"/>
+  <rect class="z" x="12" y="12" width="696" height="110" rx="10"/>
+  <text x="24" y="31" class="k">THE OWNER’S OWN FOLDER: THE RECORD</text>
+  <rect class="n" x="24" y="44" width="208" height="64" rx="6"/>
+  <text x="34" y="65" class="b">The owner’s own records</text>
+  <text x="34" y="81" class="m">CVs, job files,</text>
+  <text x="34" y="95" class="m">credentials, repos</text>
+  <rect class="n" x="496" y="44" width="200" height="64" rx="6"/>
+  <text x="506" y="65" class="b">Graph notes and settings</text>
+  <text x="506" y="81" class="m">plain text files, one per note</text>
+  <rect class="n" x="260" y="156" width="200" height="80" rx="6"/>
+  <text x="270" y="177" class="b">Claude, running the skill</text>
+  <text x="270" y="193" class="m">method, scripts,</text>
+  <text x="270" y="207" class="m">framework library</text>
+  <rect class="z" x="12" y="270" width="696" height="110" rx="10"/>
+  <text x="24" y="369" class="k">THIS DASHBOARD ON CLAUDE.AI: A DISPLAY</text>
+  <rect class="n" x="24" y="284" width="208" height="64" rx="6"/>
+  <text x="34" y="305" class="b">Changes saved on the page</text>
+  <text x="34" y="321" class="m">waiting in the</text>
+  <text x="34" y="335" class="m">dashboard’s database</text>
+  <rect class="n" x="496" y="284" width="200" height="64" rx="6"/>
+  <text x="506" y="305" class="b">The page and its data files</text>
+  <text x="506" y="321" class="m">a snapshot of the notes</text>
+  <polyline class="e" points="232,76 488,76"/>
+  <polygon class="h" points="496,76 487,80 487,72"/>
+  <text x="364" y="66" class="m" text-anchor="middle"><tspan class="b">1</tspan>  Claude proposes competencies and links;</text>
+  <text x="364" y="93" class="m" text-anchor="middle">the owner approves each one</text>
+  <polyline class="e" points="652,108 652,276"/>
+  <polygon class="h" points="652,284 648,275 656,275"/>
+  <text x="642" y="232" class="m" text-anchor="end"><tspan class="b">2</tspan>  scripts check and count,</text>
+  <text x="642" y="247" class="m" text-anchor="end">then build this page</text>
+  <polyline class="e" points="496,316 240,316"/>
+  <polygon class="h" points="232,316 241,312 241,320"/>
+  <text x="364" y="306" class="m" text-anchor="middle"><tspan class="b">3</tspan>  a level or a job spec is changed</text>
+  <text x="364" y="333" class="m" text-anchor="middle">on the page, then saved</text>
+  <polyline class="e" points="124,284 124,196 252,196"/>
+  <polygon class="h" points="260,196 251,200 251,192"/>
+  <text x="134" y="232" class="m"><tspan class="b">4</tspan>  Claude exports</text>
+  <text x="134" y="247" class="m">what was saved</text>
+  <polyline class="e" points="460,196 540,196 540,116"/>
+  <polygon class="h" points="540,108 544,117 536,117"/>
+  <text x="532" y="143" class="m" text-anchor="end"><tspan class="b">5</tspan>  the link editor writes it into the notes</text>
+</svg>

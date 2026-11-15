@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 752 306" width="752" height="306" role="img" aria-label="The dashboard’s own database and who writes to it. Claude writes the page and the addresses of the data files at each build, and the page in a reader’s browser reads them. The page writes changed levels, ratings, job specs and the list of assessors when someone presses Save; they wait there until Claude exports them, applies them to the owner’s files and deletes them.">
+  <title>The dashboard’s own database and who writes to it. Claude writes the page and the addresses of the data files at each build, and the page in a reader’s browser reads them. The page writes changed levels, ratings, job specs and the list of assessors when someone presses Save; they wait there until Claude exports them, applies them to the owner’s files and deletes them.</title>
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: #1f2328; }
+  text.m { fill: #59636e; font-size: 11.5px; }
+  text.k { fill: #59636e; font-size: 9.5px; letter-spacing: .06em; }
+  .b { fill: #1f2328; font-weight: 600; }
+  .n { fill: #f3f4f6; stroke: #1f2328; stroke-width: 1; }
+  .n.i { fill: #ffffff; stroke: #59636e; }
+  .n.q { fill: none; stroke: #59636e; stroke-dasharray: 4 3; }
+  .z { fill: none; stroke: #d1d9e0; stroke-width: 1.5; }
+  .e { fill: none; stroke: #1f2328; stroke-width: 1.25; }
+  .e.q { stroke-dasharray: 4 3; }
+  .h { fill: #1f2328; }
+  </style>
+  <rect x="-15.5" y="-15.5" width="751" height="305" rx="8" fill="#ffffff" stroke="#d1d9e0"/>
+  <rect class="z" x="232" y="12" width="256" height="250" rx="10"/>
+  <text x="244" y="31" class="k">THE DASHBOARD’S DATABASE</text>
+  <rect class="n" x="250" y="42" width="220" height="72" rx="6"/>
+  <text x="260" y="59" class="k">REPLACED AT EACH BUILD</text>
+  <text x="260" y="77" class="m">files: the page itself</text>
+  <text x="260" y="91" class="m">datasets: where each data file is</text>
+  <rect class="n" x="250" y="140" width="220" height="108" rx="6"/>
+  <text x="260" y="157" class="k">CHANGES WAITING TO BE APPLIED</text>
+  <text x="260" y="179" class="m">claims: levels and ratings</text>
+  <text x="260" y="195" class="m">jobspecs: job specs</text>
+  <text x="260" y="211" class="m">settings: the list of assessors</text>
+  <!-- kg:fw -->
+  <text x="260" y="227" class="m">and the choice of frameworks</text>
+  <!-- /kg:fw -->
+  <rect class="n" x="12" y="96" width="150" height="60" rx="6"/>
+  <text x="22" y="117" class="b">Claude</text>
+  <text x="22" y="133" class="m">running the skill</text>
+  <rect class="n" x="558" y="96" width="150" height="60" rx="6"/>
+  <text x="568" y="117" class="b">The page</text>
+  <text x="568" y="133" class="m">in a reader’s browser</text>
+  <polyline class="e" points="87,96 87,78 242,78"/>
+  <polygon class="h" points="250,78 241,82 241,74"/>
+  <text x="168" y="70" class="m" text-anchor="middle">writes at each build</text>
+  <polyline class="e" points="250,186 87,186 87,164"/>
+  <polygon class="h" points="87,156 91,165 83,165"/>
+  <text x="168" y="178" class="m" text-anchor="middle">exports, applies,</text>
+  <text x="168" y="202" class="m" text-anchor="middle">then deletes</text>
+  <polyline class="e" points="470,78 633,78 633,88"/>
+  <polygon class="h" points="633,96 629,87 637,87"/>
+  <text x="552" y="70" class="m" text-anchor="middle">reads</text>
+  <polyline class="e" points="633,156 633,186 478,186"/>
+  <polygon class="h" points="470,186 479,182 479,190"/>
+  <text x="552" y="178" class="m" text-anchor="middle">writes on Save</text>
+</svg>

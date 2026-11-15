@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-16 -16 752 330" width="752" height="330" role="img" aria-label="How a supported level is worked out. Two projects inside a role at organisation A collapse into one unit; an engagement at organisation B is a second unit and a credential a third. All three demonstrate Lease negotiation and roll up to Leasing and to Real property. For Lease negotiation the counts are three units, two of them led, two organisations, about ten years of work and about four years led. The level rule gives a supported level of L2 Practitioner, which is compared with the claimed level stored in the note, L3 Advanced.">
+  <title>How a supported level is worked out. Two projects inside a role at organisation A collapse into one unit; an engagement at organisation B is a second unit and a credential a third. All three demonstrate Lease negotiation and roll up to Leasing and to Real property. For Lease negotiation the counts are three units, two of them led, two organisations, about ten years of work and about four years led. The level rule gives a supported level of L2 Practitioner, which is compared with the claimed level stored in the note, L3 Advanced.</title>
+  <style>
+  text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; fill: #f0f6fc; }
+  text.m { fill: #9198a1; font-size: 11.5px; }
+  text.k { fill: #9198a1; font-size: 9.5px; letter-spacing: .06em; }
+  .b { fill: #f0f6fc; font-weight: 600; }
+  .n { fill: #161b22; stroke: #f0f6fc; stroke-width: 1; }
+  .n.i { fill: #0d1117; stroke: #9198a1; }
+  .n.q { fill: none; stroke: #9198a1; stroke-dasharray: 4 3; }
+  .z { fill: none; stroke: #3d444d; stroke-width: 1.5; }
+  .e { fill: none; stroke: #f0f6fc; stroke-width: 1.25; }
+  .e.q { stroke-dasharray: 4 3; }
+  .h { fill: #f0f6fc; }
+  </style>
+  <rect x="-15.5" y="-15.5" width="751" height="329" rx="8" fill="#0d1117" stroke="#3d444d"/>
+  <text x="12" y="22" class="k">EVIDENCE NOTES</text>
+  <text x="306" y="22" class="k">COMPETENCIES</text>
+  <text x="530" y="22" class="k">WORKED OUT, NEVER STORED</text>
+  <rect class="n" x="12" y="36" width="210" height="118" rx="6"/>
+  <text x="22" y="53" class="k">ROLE, ORGANISATION A</text>
+  <text x="22" y="71" class="b">2015–2021</text>
+  <rect class="n i" x="24" y="86" width="186" height="26" rx="4"/>
+  <text x="34" y="103" class="m">Project, 2019: led</text>
+  <rect class="n i" x="24" y="118" width="186" height="26" rx="4"/>
+  <text x="34" y="135" class="m">Project, 2020</text>
+  <rect class="n" x="12" y="166" width="210" height="48" rx="6"/>
+  <text x="22" y="183" class="k">ENGAGEMENT, ORGANISATION B</text>
+  <text x="22" y="201" class="b">2022–2024: led</text>
+  <rect class="n" x="12" y="226" width="210" height="48" rx="6"/>
+  <text x="22" y="243" class="k">CREDENTIAL</text>
+  <text x="22" y="261" class="b">Awarded 2014</text>
+  <polyline class="e" points="222,95 264,95"/>
+  <text x="243" y="88" class="m" text-anchor="middle">1 unit</text>
+  <polyline class="e" points="222,190 264,190"/>
+  <text x="243" y="183" class="m" text-anchor="middle">1 unit</text>
+  <polyline class="e" points="222,250 264,250"/>
+  <text x="243" y="243" class="m" text-anchor="middle">1 unit</text>
+  <polyline class="e" points="264,95 264,250"/>
+  <polyline class="e" points="264,218 298,218"/>
+  <polygon class="h" points="306,218 297,222 297,214"/>
+  <rect class="n" x="306" y="36" width="160" height="44" rx="6"/>
+  <text x="316" y="57" class="b">Real property</text>
+  <rect class="n" x="306" y="116" width="160" height="44" rx="6"/>
+  <text x="316" y="137" class="b">Leasing</text>
+  <rect class="n" x="306" y="196" width="160" height="44" rx="6"/>
+  <text x="316" y="217" class="b">Lease negotiation</text>
+  <polyline class="e" points="386,196 386,168"/>
+  <polygon class="h" points="386,160 390,169 382,169"/>
+  <text x="394" y="183" class="m">rolls up</text>
+  <polyline class="e" points="386,116 386,88"/>
+  <polygon class="h" points="386,80 390,89 382,89"/>
+  <text x="394" y="103" class="m">rolls up</text>
+  <polyline class="e" points="466,218 522,218"/>
+  <polygon class="h" points="530,218 521,222 521,214"/>
+  <text x="498" y="210" class="m" text-anchor="middle">counted</text>
+  <rect class="n q" x="530" y="188" width="178" height="98" rx="6"/>
+  <text x="540" y="209" class="b">For Lease negotiation</text>
+  <text x="540" y="225" class="m">3 units, 2 of them led</text>
+  <text x="540" y="239" class="m">2 organisations</text>
+  <text x="540" y="253" class="m">about 10 years of work</text>
+  <text x="540" y="267" class="m">about 4 years led</text>
+  <polyline class="e" points="619,188 619,162"/>
+  <polygon class="h" points="619,154 623,163 615,163"/>
+  <text x="611" y="175" class="m" text-anchor="end">level rule applied</text>
+  <rect class="n q" x="530" y="110" width="178" height="44" rx="6"/>
+  <text x="540" y="127" class="k">SUPPORTED LEVEL</text>
+  <text x="540" y="145" class="b">L2 Practitioner</text>
+  <polyline class="e" points="619,110 619,80"/>
+  <text x="611" y="99" class="m" text-anchor="end">compared</text>
+  <rect class="n" x="530" y="36" width="178" height="44" rx="6"/>
+  <text x="540" y="53" class="k">CLAIMED LEVEL, STORED</text>
+  <text x="540" y="71" class="b">L3 Advanced</text>
+</svg>
