@@ -34,7 +34,7 @@ datedFilenames: true                 # prefix files Claude names itself with YYY
 # requirements: Competency_Graph/Competencies/Framework_Requirements.csv   # optional; checked: levels must be L1-L4
 # descriptions: Competency_Graph/Competencies/Framework_Descriptions.csv   # optional; default: beside requirements
 # jobSpecs: Competency_Graph/Competencies/Job_Specs.yaml   # optional; this is the default (dashboard.md §5)
-# ownFrameworks: Competency_Graph/Frameworks   # optional; the owner's own frameworks, in the library's format
+# ownFrameworks: Competency_Graph/Frameworks   # optional; this is the default. The owner's own frameworks (frameworks.py new)
 # dashboard:                         # optional; what dashboard_build.py writes into the page
 #   title: Priya's competency portfolio
 #   sectors: NAICS Canada            # the industry classification's name

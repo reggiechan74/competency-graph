@@ -23,10 +23,20 @@ frameworks and pathways in competency-graph.yaml:
                                          written into `frameworks:` in competency-graph.yaml (dry run without --apply).
                                          A framework with nothing selected keeps its notes under `pathways: []`
 
-The owner's own frameworks: `ownFrameworks: <folder>` in the config names a folder in the library's format (its own
-`catalog.yaml`, requirements and descriptions files). They join the skill's library under their own ids, which must
-not repeat one of the skill's. A framework may have only a `descriptions` file and no `file`: a competency library
-with no pathways, offered to job specs (job_specs.py) but not on the Competency frameworks tab.
+    frameworks.py new ID --name "Framework name" [--title T] [--body B] [--no-pathways]
+    frameworks.py new ID --from LIBRARY_ID [--name "Another name"]
+                                         start one of the owner's own frameworks in their own folder: an empty one to
+                                         fill in, or a copy of one the plugin ships. A copy under the shipped id is the
+                                         owner's own edition of it and takes its place for this owner
+
+The library the plugin ships is read, never written: an update of the plugin replaces it. Everything an owner adds is
+kept in their own files. Their own frameworks live in a folder in the library's format (its own `catalog.yaml`,
+requirements and descriptions files): `ownFrameworks` in the config, else `Frameworks` under the graph root, read once
+it holds a catalog. They join the plugin's library under their own ids and names. One may instead carry a shipped
+framework's id with `replaces_plugin: true` in its catalog entry: the owner's own edition of that framework, which is
+then the one this owner sees (`list` says so, and says when the plugin's edition has since changed). A framework may
+have only a `descriptions` file and no `file`: a competency library with no pathways, offered to job specs
+(job_specs.py) but not on the Competency frameworks tab.
 
 `build` writes every framework and pathway in the library, with a `selected` column (yes/no) from the config and
 the owner's `pathway_note`, so the dashboard's Configuration tab can offer all of them and show the selected ones,
@@ -102,12 +112,128 @@ def load_library(library: str = LIBRARY, own: str | None = None) -> dict:
         mine = _load_catalog(own, True)
         names = {f["framework"]: fid for fid, f in out.items()}
         for fid, f in mine.items():
-            if fid in out:
-                raise FrameworkError(f"own framework id {fid!r} is already in the skill's library; choose another")
-            if f["framework"] in names:
+            if fid in out and not f.get("replaces_plugin"):
+                raise FrameworkError(f"own framework id {fid!r} is already in the plugin's library; choose another id, or "
+                                     "add `replaces_plugin: true` to make it your own edition of that framework")
+            if f["framework"] in names and names[f["framework"]] != fid:
                 raise FrameworkError(f"own framework {fid}: name {f['framework']!r} is already used by {names[f['framework']]}")
+            names[f["framework"]] = fid       # nor may two of the owner's own share a name
+            if fid in out:        # the owner's own edition takes the shipped one's place, and remembers what it replaced
+                f["shipped_edition"] = out[fid].get("edition")
+        # an own edition keeps the shipped framework's place in the list
+        out = {fid: mine.pop(fid) if fid in mine else fw for fid, fw in out.items()}
         out.update(mine)
     return out
+
+
+def own_entry(fid: str, meta: dict) -> str:
+    """One framework's entry for the owner's catalog.yaml, as text to append."""
+    lines = [f"  {fid}:"]
+    for key in ("framework", "title", "body", "field", "edition", "status", "status_note", "replaces_plugin", "based_on",
+                "file", "descriptions", "guide", "levels"):
+        if meta.get(key) not in (None, ""):
+            v = meta[key]
+            lines.append(f"    {key}: {'true' if v is True else yq(v)}")
+    if meta.get("sources"):
+        lines.append("    sources:")
+        lines += [f"      - {yq(x)}" for x in meta["sources"]]
+    return "\n".join(lines) + "\n"
+
+
+OWN_CATALOG_HEAD = """\
+# Your own frameworks: the same format as the plugin's assets/frameworks/catalog.yaml. They are yours and stay here:
+# a plugin update never touches this folder. frameworks.py reads them beside the plugin's library, so pathways and
+# job specs can use them. An entry under a shipped framework's id with `replaces_plugin: true` is your own edition of it.
+frameworks:
+"""
+
+
+def new_framework(home: str, fid: str, lib: dict, name: str | None = None, source: str | None = None, title: str | None = None,
+                  body: str | None = None, pathways: bool = True, today: str = "") -> list[str]:
+    """Start an own framework in `home` (the owner's own frameworks folder): empty files to fill in, or a copy of the
+    library framework `source`. Returns the files written. Raises FrameworkError and writes nothing it does not undo."""
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", fid):
+        raise FrameworkError(f"id {fid!r} must be lowercase letters and digits joined by hyphens")
+    if kc._inside(home, kc.SKILL_DIR):
+        raise FrameworkError(f"{home} is inside the plugin's own folder, which an update replaces; keep your frameworks in your own files")
+    cat = os.path.join(home, "catalog.yaml")
+    existing = _load_catalog(home, True) if os.path.isfile(cat) else {}
+    if fid in existing:
+        raise FrameworkError(f"{fid} is already one of your own frameworks ({cat})")
+    shipped = {k: v for k, v in _load_catalog(LIBRARY, False).items()} if lib is None else \
+        {k: v for k, v in lib.items() if not v.get("own")}
+    if fid in shipped and source != fid:
+        raise FrameworkError(f"{fid} is the id of a framework the plugin ships; `new {fid} --from {fid}` makes your own "
+                             "edition of it, or choose another id")
+    written = []
+    if source:
+        if source not in shipped:
+            raise FrameworkError(f"no framework {source!r} in the plugin's library; `frameworks.py list` shows them")
+        src = shipped[source]
+        same = fid == source
+        if not same and not name:
+            raise FrameworkError("a copy under a new id needs its own --name, since the framework's name is how notes refer to it")
+        meta = {k: src.get(k) for k in ("title", "body", "field", "levels", "sources")}
+        # the copy keeps the standing of what it copies: it is the owner's from here, and theirs to mark as a draft
+        meta.update(framework=src["framework"] if same else name, edition=src.get("edition"),
+                    status=src.get("status"), status_note=src.get("status_note"),
+                    replaces_plugin=True if same else None, based_on=f"{source}, {src.get('edition', '?')}, copied {today}")
+        for key in ("file", "descriptions", "guide"):
+            if not src.get(key):
+                continue
+            target = src[key] if same else src[key].replace(source, fid, 1)
+            meta[key] = target
+            with open(os.path.join(src["folder"], src[key]), encoding="utf-8", newline="") as fh:
+                text = fh.read()
+            if not same and key in ("file", "descriptions"):     # the rows name their framework: the copy has its own
+                rows = list(csv.DictReader(text.splitlines(keepends=True)))
+                for r in rows:
+                    r["framework"] = name
+                cols = list(rows[0].keys()) if rows else (COLUMNS if key == "file" else DESCRIPTION_COLUMNS)
+                written.append((target, rows, cols))
+            else:
+                written.append((target, text, None))
+    else:
+        if not name:
+            raise FrameworkError("a new framework needs --name: the name notes will refer to it by")
+        meta = {"framework": name, "title": title or name, "body": body or "The owner", "edition": f"draft ({today})",
+                "status": "draft", "status_note": "New: its competencies and levels are still to be written and reviewed.",
+                "levels": "Native L1-L4: L1 knows it, L2 delivers it, L3 leads complex work, L4 is recognised beyond their own team"}
+        if pathways:
+            meta["file"] = f"{fid}.csv"
+            written.append((meta["file"], [], ["framework", "pathway", "group", "subgroup", "order", "name", "required", "rule"]))
+        meta["descriptions"] = f"{fid}-descriptions.csv"
+        written.append((meta["descriptions"], [], DESCRIPTION_COLUMNS))
+    clash = [t for t, _, _ in written if os.path.exists(os.path.join(home, t))]
+    if clash:
+        raise FrameworkError(f"{', '.join(clash)} already in {home}; move or rename before starting {fid}")
+    os.makedirs(home, exist_ok=True)
+    before = open(cat, encoding="utf-8").read() if os.path.isfile(cat) else None
+    made = []
+    try:
+        for target, content, cols in written:
+            path = os.path.join(home, target)
+            if cols is None:
+                with open(path, "w", encoding="utf-8", newline="") as fh:
+                    fh.write(content)
+            else:
+                write(path, content, cols)
+            made.append(path)
+        text = before if before is not None else OWN_CATALOG_HEAD
+        with open(cat, "w", encoding="utf-8") as fh:
+            fh.write(text + ("" if text.endswith("\n") else "\n") + own_entry(fid, meta))
+        load_library(own=home)            # it must read back beside the plugin's library
+    except (FrameworkError, OSError, KeyError, yaml.YAMLError) as exc:
+        for path in made:
+            os.remove(path)
+        if before is None:
+            if os.path.isfile(cat):
+                os.remove(cat)
+        else:
+            with open(cat, "w", encoding="utf-8") as fh:
+                fh.write(before)
+        raise FrameworkError(f"{fid} not created: {exc}") from None
+    return made + [cat]
 
 
 def library_for(cfg, library: str = LIBRARY) -> dict:
@@ -297,7 +423,7 @@ def load_selection_doc(src: str) -> list[str]:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     kc.add_arguments(ap)
-    ap.add_argument("--library", default=LIBRARY, help="framework library folder (default: the skill's assets/frameworks)")
+    ap.add_argument("--library", default=LIBRARY, help="framework library folder (default: the plugin's assets/frameworks)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     ls = sub.add_parser("list")
     ls.add_argument("--all", action="store_true", help="list every pathway, not only counts")
@@ -305,6 +431,13 @@ def main(argv=None) -> int:
     b.add_argument("--out", help="requirements file (default: the config's `requirements`)")
     b.add_argument("--descriptions", help="descriptions file (default: the config's `descriptions`, else beside the "
                    "requirements file)")
+    n = sub.add_parser("new", help="start one of your own frameworks in your own folder")
+    n.add_argument("id", help="its id: lowercase letters and digits joined by hyphens")
+    n.add_argument("--name", help="the framework's name, as notes will refer to it (externalRef)")
+    n.add_argument("--from", dest="source", help="copy this framework from the plugin's library to edit as your own")
+    n.add_argument("--title", help="a longer title (default: the name)")
+    n.add_argument("--body", help="who publishes it (default: the owner)")
+    n.add_argument("--no-pathways", action="store_true", help="a competency library only: no requirements file")
     a = sub.add_parser("apply")
     a.add_argument("--from", dest="src", required=True, help="ArtifactData export of the dashboard's `settings` collection")
     a.add_argument("--apply", action="store_true", help="write competency-graph.yaml (default: show the new block)")
@@ -320,6 +453,24 @@ def main(argv=None) -> int:
     except FrameworkError as exc:
         print(f"config: {exc}", file=sys.stderr)
         return 2
+    if args.cmd == "new":
+        home = getattr(cfg, "own_frameworks_home", None) if cfg else None
+        if not home:
+            print("new needs a competency-graph.yaml, which says where your own frameworks are kept", file=sys.stderr)
+            return 2
+        import datetime as dt
+        try:
+            made = new_framework(home, args.id, lib, name=args.name, source=args.source, title=args.title, body=args.body,
+                                 pathways=not args.no_pathways, today=dt.date.today().isoformat())
+        except FrameworkError as exc:
+            print(f"new: {exc}", file=sys.stderr)
+            return 2
+        print(f"{args.id}: started in {cfg.rel(home)}, in your own files (a plugin update never touches them)")
+        for path in made:
+            print(f"  {cfg.rel(path)}")
+        print("next: fill in the files, select it under `frameworks:` in competency-graph.yaml if it has pathways, "
+              "then `frameworks.py build`")
+        return 0
     if args.cmd == "apply":
         if not cfg or not cfg.path:
             print("apply needs a competency-graph.yaml to write", file=sys.stderr)
@@ -361,6 +512,10 @@ def main(argv=None) -> int:
             size = (f"{len(fw['pathways'])} pathway(s), {len(chosen)} selected" if fw["pathways"]
                     else f"{len(fw['descriptions_rows'])} competencies, no pathways (job specs only)")
             own = " OWN." if fw.get("own") else ""
+            if fw.get("replaces_plugin"):
+                own = " OWN EDITION: yours takes the place of the plugin's."
+                if fw.get("shipped_edition") and fw.get("based_on") and str(fw["shipped_edition"]) not in str(fw["based_on"]):
+                    own += f" The plugin's has changed since (yours is based on {fw['based_on']}; the plugin's is now {fw['shipped_edition']})." 
             print(f"{fid}: {fw.get('title', fw['framework'])} ({fw.get('body', '?')}, {fw.get('edition', '?')})."
                   f"{own}{draft} {size}")
             if draft and fw.get("status_note"):
@@ -376,6 +531,9 @@ def main(argv=None) -> int:
     out = args.out or (cfg.requirements if cfg else None)
     if not out:
         print("give --out, or set `requirements` in competency-graph.yaml", file=sys.stderr)
+        return 2
+    if kc._inside(out, kc.SKILL_DIR):
+        print(f"build: {out} is inside the plugin's own folder, which an update replaces; write it in your own files", file=sys.stderr)
         return 2
     rows = build_rows(lib, sel)
     write(out, rows)

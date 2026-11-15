@@ -42,7 +42,7 @@ Run `kg_config.py where` from the folder the owner is working in: it prints the 
 | Material made for a reader: requirement tables, evidence packs, CV material, summaries, the dashboard copy | `folders.outputs` | `<graphRoot>/Outputs` | Anywhere; some owners use their applications folder |
 | Framework requirements file | `requirements` | `<graphRoot>/Competencies/Framework_Requirements.csv` | Inside the vault; only if the owner picks frameworks (§6) |
 | Framework descriptions file | `descriptions` | beside the requirements file (`Framework_Descriptions.csv`) | Inside the vault |
-| The owner's own frameworks | `ownFrameworks` | none | Inside the vault; only if they want competencies no body defines (§6) |
+| The owner's own frameworks | `ownFrameworks` | `<graphRoot>/Frameworks` | Inside the vault. Read once it holds a `catalog.yaml`, which `frameworks.py new` writes (§6) |
 | Job specs | `jobSpecs` | `<graphRoot>/Competencies/Job_Specs.yaml` | Inside the vault |
 | Dashboard title, classification name, disclosure | `dashboard` | "Competency portfolio", "top-level industry", `on-request` | Only if they want a dashboard |
 | Date prefix on files Claude names | `datedFilenames` | `true` | |
@@ -133,7 +133,15 @@ python3 $S/frameworks.py build      # writes `requirements`, and `descriptions` 
 python3 $S/check_graph.py           # the requirements file is checked: every level on L1-L4
 ```
 
-A framework the library lacks is added to the library, not to one owner's file (`domains-and-classifications.md` §6). Competencies only this owner uses (their own methods, tools and practice) go in their own frameworks instead (`ownFrameworks`), with L1–L4 wording they approve.
+**Everything the owner adds is saved in their own files, never in the plugin.** The plugin's library (`assets/frameworks/`) is read only: a plugin update replaces that folder, so anything written there would be lost. A framework the library lacks, a firm's own framework, the owner's own methods, tools and practice, and an owner's own wording for a shipped framework all go in their own frameworks folder (`ownFrameworks`, by default `<graphRoot>/Frameworks`):
+
+```bash
+python3 $S/frameworks.py new firm-method --name "Firm Method"     # an empty framework to fill in, with L1–L4 wording they approve
+python3 $S/frameworks.py new firm-tools --name "Firm Tools" --no-pathways   # a competency library only, for job specs
+python3 $S/frameworks.py new rics-apc --from rics-apc             # their own edition of a shipped framework, to reword
+```
+
+An own edition takes the shipped framework's place for this owner, under the same id and name, so their notes' `externalRef` still match. A framework other owners could use can be offered to the plugin's library through its repository; until a release ships it, it works from the owner's folder (`domains-and-classifications.md` §6).
 
 ## 7. Hand over to the build
 

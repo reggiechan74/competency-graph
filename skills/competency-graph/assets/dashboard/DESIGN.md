@@ -53,6 +53,7 @@ So the number moves with every release, whether or not the page changed. Add a l
 - **Minor** (1.x.0): something new to see or use: a tab, a card, a column or a control on the page; a script, a command, a framework or a field in the skill.
 - **Major** (x.0.0): data files, store documents, settings or notes in a new shape, so a dashboard must be rebuilt and its saved changes applied first, or an owner's files migrated.
 
+- **1.8.0** (2026-11-15): no change to the page; see the plugin’s `CHANGELOG.md`.
 - **1.7.2** (2026-11-15): a rewording. On Domains across industries the column for units with no sector is headed "Own work & credentials", not "No sector", which read as a gap in the record; the card's note and General definitions say what it holds, and the units table says "None" under Sector. The data files still say "No sector". The room kept at the grid's right for the last angled names is measured until they fit: one pass left a long last name a few pixels over the card's edge, where it faded.
 - **1.7.1** (2026-11-15): a fix. On the rating fit chart, a bar's end label with both marks ("51 ▲7 ▼3") ran 10px past the chart's right edge when the longest bar carried it; the room kept for the label is now its drawn width. Found by the dashboard's own check (`labels_cut`) once a domain split made such a bar the longest.
 - **1.7.0** (2026-11-15): Domains across industries names each sector with its code, "Information (51)", and the card's note says what the number is. Reads the `code` field of the sectors data file, and a file without it as before.

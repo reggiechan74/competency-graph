@@ -1,11 +1,11 @@
 # competency-graph
 
-[![Version](https://img.shields.io/badge/Version-1.7.2-FF6B35)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/Version-1.8.0-FF6B35)](CHANGELOG.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Specification](https://img.shields.io/badge/Specification-v0.5-8B5CF6)](skills/competency-graph/references/specification.md)
 [![Frameworks](https://img.shields.io/badge/Frameworks-6-E879F9)](skills/competency-graph/assets/frameworks/)
-[![Tests](https://img.shields.io/badge/Tests-239-2EA043)](skills/competency-graph/scripts/tests/)
+[![Tests](https://img.shields.io/badge/Tests-243-2EA043)](skills/competency-graph/scripts/tests/)
 [![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-F97316?logo=anthropic&logoColor=white)](https://claude.ai/code)
 
 A Claude Code plugin that helps one person build and keep a **competency graph**: what they know, and the evidence that proves it.
@@ -171,14 +171,36 @@ Claude asks where your records are, proposes domains and placements for you to a
 
 ## Where your files go
 
-Your graph lives in your own files, never in this plugin. A `competency-graph.yaml` file records where everything is saved.
+Everything you create is saved in your own files, never in this plugin. A `competency-graph.yaml` file records where.
 
-| Where you start | Default location |
+| Where you start | Default location of your graph |
 |---|---|
 | Inside a git repository | `Competency_Graph/` at the repository's root |
 | Anywhere else | `Competency_Graph/` in your Documents folder |
 
 You can choose any other place. `kg_config.py where` prints the default for the folder you are in.
+
+| What you add | Where it is saved |
+|---|---|
+| Your competencies, sectors and evidence | Notes in your graph folder |
+| Your own frameworks | `Frameworks/` in your graph folder |
+| Your job specs | `Job_Specs.yaml` beside your competencies |
+| Your choice of frameworks, your assessors, your dashboard settings | `competency-graph.yaml` |
+| Your thresholds, conventions and decision log | Your profile |
+
+The plugin's own folder is replaced whenever the plugin updates, so the scripts never write there and refuse a setting that points inside it. An update cannot touch your graph.
+
+### Your own frameworks
+
+The plugin ships a library of frameworks, which it only reads. Yours live beside your graph and are read with it:
+
+```
+frameworks.py new firm-method --name "Firm Method"        # a framework of your own, empty and ready to fill in
+frameworks.py new firm-tools --name "Firm Tools" --no-pathways   # a list of competencies only, for job specs
+frameworks.py new rics-apc --from rics-apc                 # your own edition of a shipped framework, to reword
+```
+
+Your own edition of a shipped framework takes its place for you, under the same name, so your notes still match it. `frameworks.py list` marks it and tells you when the plugin's version has changed since you copied it. A framework others could use can be offered to the library through this repository.
 
 ## What is in the plugin
 
@@ -200,7 +222,7 @@ Everything is under `skills/competency-graph/`:
 | RICS APC | Royal Institution of Chartered Surveyors, December 2025 guides | Restated on L1 to L4 |
 | CFA CBOK | CFA Institute, 2027 curriculum topic weights | Restated on L1 to L4 |
 | ASQ CSSGB | ASQ, 2022 Six Sigma Green Belt Body of Knowledge | Restated on L1 to L4 |
-| Chan AFSE, Chan AGEN, Chan CXMDS | The author's own role frameworks | Drafts, under review |
+| Chan AFSE, Chan AGEN, Chan CXMDS | The author's own role frameworks, shipped as examples of a framework an owner writes | Drafts, under review |
 
 The first three are drawn from those bodies' published guides, which remain theirs (see `NOTICE.md`). Check a framework against its current guide before relying on it: bodies revise them every few years. `catalog.yaml` lists each framework's sources and how its levels were mapped.
 
@@ -210,7 +232,7 @@ The plugin and the dashboard page it builds share one version number, so the num
 
 | What | Version | Where it is recorded |
 |---|---|---|
-| The plugin and its dashboard page | 1.7.2 | `CHANGELOG.md`; the page's own history is in `assets/dashboard/DESIGN.md` |
+| The plugin and its dashboard page | 1.8.0 | `CHANGELOG.md`; the page's own history is in `assets/dashboard/DESIGN.md` |
 | The specification (the graph's fields and rules) | 0.5 | `references/specification.md`, and `kgSpecVersion` in each owner's profile |
 
 The specification keeps its own number because it versions the owner's notes, not the software: a graph written to 0.5 stays valid through plugin releases that do not change the format.

@@ -267,7 +267,7 @@ def test_own_frameworks_join_the_library_and_may_have_no_pathways(tmp_path):
 def test_own_framework_may_not_reuse_a_library_id_or_name(tmp_path):
     own = own_library(tmp_path)
     (own / "catalog.yaml").write_text("frameworks:\n  rics-apc:\n    framework: X\n    descriptions: own-practice-descriptions.csv\n")
-    with pytest.raises(fw.FrameworkError, match="already in the skill's library"):
+    with pytest.raises(fw.FrameworkError, match="already in the plugin's library"):
         fw.load_library(own=str(own))
     (own / "catalog.yaml").write_text("frameworks:\n  mine:\n    framework: RICS APC\n    descriptions: own-practice-descriptions.csv\n")
     with pytest.raises(fw.FrameworkError, match="already used"):
@@ -301,3 +301,95 @@ def test_apply_refuses_a_selection_the_library_lacks(tmp_path):
     (tmp_path / kc.CONFIG_NAME).write_text("kgConfigVersion: 1\ngraphRoot: KG\n")
     (tmp_path / "s.json").write_text(json.dumps({"selected": ["RICS APC|Astrology"]}))
     assert fw.main(["--vault", str(tmp_path), "apply", "--from", str(tmp_path / "s.json"), "--apply"]) == 2
+
+
+def own_vault(tmp_path, extra=""):
+    (tmp_path / kc.CONFIG_NAME).write_text("kgConfigVersion: 1\ngraphRoot: KG\n" + extra)
+    (tmp_path / "KG").mkdir(exist_ok=True)
+    return tmp_path
+
+
+def test_a_new_own_framework_is_started_in_the_owners_files_and_read_without_a_setting(tmp_path, capsys):
+    v = own_vault(tmp_path)
+    cfg = kc.read_config(str(v / kc.CONFIG_NAME))
+    assert cfg.own_frameworks is None and cfg.own_frameworks_home == str(v / "KG" / "Frameworks")   # a home, nothing in it yet
+    assert fw.main(["--vault", str(v), "new", "firm-method", "--name", "Firm Method", "--body", "Example LLP"]) == 0
+    home = v / "KG" / "Frameworks"
+    assert sorted(p.name for p in home.iterdir()) == ["catalog.yaml", "firm-method-descriptions.csv", "firm-method.csv"]
+    assert (home / "firm-method-descriptions.csv").read_text().strip() == ",".join(fw.DESCRIPTION_COLUMNS)
+    # no `ownFrameworks:` in the config: the default folder is read once it holds a catalog
+    cfg = kc.read_config(str(v / kc.CONFIG_NAME))
+    assert cfg.own_frameworks == str(home)
+    lib = fw.library_for(cfg)
+    assert lib["firm-method"]["own"] and lib["firm-method"]["framework"] == "Firm Method" and lib["firm-method"]["status"] == "draft"
+    assert not lib["rics-apc"]["own"]                              # the plugin's library is still there beside it
+    # a competency library only, a second id, and the refusals; a refusal writes nothing
+    assert fw.main(["--vault", str(v), "new", "firm-tools", "--name", "Firm Tools", "--no-pathways"]) == 0
+    assert not (home / "firm-tools.csv").exists() and (home / "firm-tools-descriptions.csv").exists()
+    before = sorted(p.name for p in home.iterdir()), (home / "catalog.yaml").read_text()
+    for bad in (["new", "firm-method", "--name", "Again"], ["new", "Bad Id", "--name", "X"], ["new", "another"],
+                ["new", "rics-apc", "--name", "X"], ["new", "copy2", "--from", "cfa-cbok"], ["new", "x", "--from", "nope"],
+                ["new", "third", "--name", "Firm Method"]):
+        assert fw.main(["--vault", str(v)] + bad) == 2, bad
+    assert (sorted(p.name for p in home.iterdir()), (home / "catalog.yaml").read_text()) == before
+    assert "is the id of a framework the plugin ships" in capsys.readouterr().err
+
+
+def test_an_own_edition_of_a_shipped_framework_takes_its_place_for_this_owner(tmp_path, capsys):
+    v = own_vault(tmp_path)
+    shipped = fw.load_library()["asq-cssgb"]
+    assert fw.main(["--vault", str(v), "new", "asq-cssgb", "--from", "asq-cssgb"]) == 0
+    home = v / "KG" / "Frameworks"
+    # the files are copies, byte for byte, in the owner's folder; the plugin's are untouched
+    for key in ("file", "descriptions"):
+        assert (home / shipped[key]).read_bytes() == open(os.path.join(fw.LIBRARY, shipped[key]), "rb").read()
+    # the owner edits their copy: that wording is what they now see, under the same id and name, in the same place
+    text = (home / shipped["descriptions"]).read_text()
+    first = shipped["descriptions_rows"][0]["description"]
+    (home / shipped["descriptions"]).write_text(text.replace(first, "My own wording.", 1))
+    lib = fw.library_for(kc.read_config(str(v / kc.CONFIG_NAME)))
+    mine = lib["asq-cssgb"]
+    assert mine["own"] and mine["replaces_plugin"] is True and mine["framework"] == shipped["framework"]
+    assert mine["descriptions_rows"][0]["description"] == "My own wording."
+    assert list(lib)[:3] == ["rics-apc", "cfa-cbok", "asq-cssgb"] and len(lib) == len(fw.load_library())
+    assert fw.load_library()["asq-cssgb"]["descriptions_rows"][0]["description"] == first
+    capsys.readouterr()
+    assert fw.main(["--vault", str(v), "list"]) == 0
+    said = capsys.readouterr().out
+    assert "OWN EDITION: yours takes the place of the plugin's." in said and "has changed since" not in said
+    # when the plugin's edition moves on, list says so
+    cat = home / "catalog.yaml"
+    cat.write_text(cat.read_text().replace("based_on: ", "based_on: \"asq-cssgb, an older edition\" # "))
+    assert fw.main(["--vault", str(v), "list"]) == 0
+    assert "The plugin's has changed since" in capsys.readouterr().out
+
+
+def test_a_copy_under_a_new_id_is_a_framework_of_its_own(tmp_path):
+    v = own_vault(tmp_path)
+    assert fw.main(["--vault", str(v), "new", "my-cfa", "--from", "cfa-cbok", "--name", "My CFA"]) == 0
+    lib = fw.library_for(kc.read_config(str(v / kc.CONFIG_NAME)))
+    assert lib["my-cfa"]["own"] and not lib["my-cfa"].get("replaces_plugin") and not lib["cfa-cbok"]["own"]
+    assert {r["framework"] for r in lib["my-cfa"]["rows"]} == {"My CFA"}
+    assert {r["framework"] for r in lib["my-cfa"]["descriptions_rows"]} == {"My CFA"}
+    assert lib["my-cfa"]["pathways"] == lib["cfa-cbok"]["pathways"]
+
+
+def test_nothing_of_the_owners_is_kept_in_the_plugins_own_folder(tmp_path, capsys, monkeypatch):
+    inside = os.path.join(kc.SKILL_DIR, "assets", "frameworks")
+    v = own_vault(tmp_path)
+    # a requirements file is never built into the plugin, nor an own framework started there
+    assert fw.main(["--vault", str(v), "build", "--out", os.path.join(inside, "x.csv")]) == 2
+    assert "plugin's own folder" in capsys.readouterr().err and not os.path.exists(os.path.join(inside, "x.csv"))
+    with pytest.raises(fw.FrameworkError, match="plugin's own folder"):
+        fw.new_framework(os.path.join(inside, "own"), "x", None, name="X", today="2026-11-15")
+    assert not os.path.exists(os.path.join(inside, "own"))
+    # and no setting may point into it, even in a vault that holds the plugin (the plugin's own repository, say)
+    monkeypatch.setattr(kc, "SKILL_DIR", str(tmp_path / "plugin" / "skills" / "competency-graph"))
+    for text in ("graphRoot: plugin/skills/competency-graph/assets\n",
+                 "graphRoot: KG\nownFrameworks: plugin/skills/competency-graph/assets/frameworks\n",
+                 "graphRoot: KG\nrequirements: plugin/skills/competency-graph/assets/frameworks/mine.csv\n",
+                 "graphRoot: KG\njobSpecs: plugin/skills/competency-graph/Job_Specs.yaml\n",
+                 "graphRoot: KG\nfolders:\n  outputs: plugin/skills/competency-graph/out\n"):
+        (tmp_path / kc.CONFIG_NAME).write_text("kgConfigVersion: 1\n" + text)
+        with pytest.raises(kc.ConfigError, match="plugin's own folder"):
+            kc.read_config(str(tmp_path / kc.CONFIG_NAME))

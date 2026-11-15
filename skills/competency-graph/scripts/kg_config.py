@@ -68,6 +68,10 @@ CONFIG_NAME = "competency-graph.yaml"
 LEGACY_CONFIG_NAMES = ("knowledge-graph.yaml",)   # the name before the skill was renamed (2026-11-13)
 CONFIG_VERSION = 1
 DEFAULT_GRAPH_ROOT = "Competency_Graph"            # a new graph's folder
+OWN_FRAMEWORKS = "Frameworks"                      # under the graph root: the owner's own frameworks, when not named
+# This skill's own folder. An update of the plugin replaces it, so nothing of the owner's may be saved inside it:
+# the library it ships (assets/frameworks) is read, never written.
+SKILL_DIR = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 LEGACY_GRAPH_ROOTS = ("Knowledge_Graph",)          # the default before 2026-11-15; still read where it is the one there
 FOLDERS = {  # key -> (default subfolder of graphRoot, what goes there)
     "competencies": ("Competencies", "competency notes"),
@@ -106,7 +110,8 @@ class Config:
     descriptions: str | None = None  # framework descriptions CSV (absolute), or None (beside requirements)
     sources: list = field(default_factory=list)     # [{path (absolute), kind, use, note}] the owner's records
     job_specs: str | None = None    # job specs YAML (absolute), or None (the default beside the competencies)
-    own_frameworks: str | None = None   # folder of the owner's own frameworks (absolute), or None
+    own_frameworks: str | None = None   # folder of the owner's own frameworks (absolute), or None when there are none
+    own_frameworks_home: str | None = None   # where they go: `ownFrameworks`, else <graphRoot>/Frameworks
     dashboard: dict = field(default_factory=dict)   # {title?, sectors?, disclosure?} for dashboard_build.py
     assessors: dict = field(default_factory=dict)   # id -> {name, role}: who rates the owner's competencies
 
@@ -353,6 +358,18 @@ def read_config(path: str) -> Config:
     own = _resolve(vault, data["ownFrameworks"], "ownFrameworks") if data.get("ownFrameworks") else None
     if own and not _inside(own, vault):
         raise ConfigError(f"{path}: ownFrameworks ({own}) is outside the vault")
+    # the owner's own frameworks have a home whether or not the config names one: <graphRoot>/Frameworks. They are
+    # read from there once a catalog exists (frameworks.py new writes the first)
+    own_home = own or os.path.join(graph_root, OWN_FRAMEWORKS)
+    if not own and os.path.isfile(os.path.join(own_home, "catalog.yaml")):
+        own = own_home
+    # nothing of the owner's is kept in the plugin's own folder: an update replaces it
+    kept = {"graphRoot": graph_root, "profile": profile, "requirements": req, "descriptions": desc, "jobSpecs": js,
+            "ownFrameworks": own_home, **{f"folders.{k}": v for k, v in folders.items()}}
+    for key, where in kept.items():
+        if where and _inside(where, SKILL_DIR):
+            raise ConfigError(f"{path}: {key} ({where}) is inside the plugin's own folder, which an update replaces; "
+                              "keep it in your own files")
     dash = data.get("dashboard") or {}
     if not isinstance(dash, dict) or set(dash) - DASHBOARD_KEYS:
         raise ConfigError(f"{path}: dashboard takes only {sorted(DASHBOARD_KEYS)}")
@@ -368,7 +385,7 @@ def read_config(path: str) -> Config:
         raise ConfigError(f"{path}: {exc}") from None
     return Config(vault=vault, profile=profile, graph_root=graph_root, folders=folders, dated=dated, path=path,
                   requirements=req, frameworks=fws, descriptions=desc, sources=srcs, job_specs=js,
-                  own_frameworks=own, dashboard=dict(dash), assessors=assessors)
+                  own_frameworks=own, own_frameworks_home=own_home, dashboard=dict(dash), assessors=assessors)
 
 
 def load(config: str | None = None, vault: str | None = None, profile: str | None = None,
@@ -496,9 +513,11 @@ def show(cfg: Config) -> str:
         out.append(f"{'descriptions':<12} {cfg.rel(d)}{'' if os.path.isfile(d) else '  (not built yet)'}")
     j = cfg.job_specs_file
     out.append(f"{'job specs':<12} {cfg.rel(j)}{'' if os.path.isfile(j) else '  (none yet)'}")
-    if cfg.own_frameworks:
-        o = cfg.own_frameworks
-        out.append(f"{'own frameworks':<12} {cfg.rel(o)}{'' if os.path.isfile(os.path.join(o, 'catalog.yaml')) else '  (MISSING catalog.yaml)'}")
+    o = cfg.own_frameworks or cfg.own_frameworks_home
+    if o:
+        state = "" if os.path.isfile(os.path.join(o, "catalog.yaml")) else (
+            "  (MISSING catalog.yaml)" if cfg.own_frameworks else "  (none yet: `frameworks.py new` makes the first)")
+        out.append(f"{'own frameworks':<12} {cfg.rel(o)}{state}")
     if cfg.assessors:
         out += ["", "assessors (who rates the owner's competencies):"]
         out += [f"  {aid:<20} {a['name']}" + (f"  ({a['role']})" if a["role"] else "") for aid, a in cfg.assessors.items()]

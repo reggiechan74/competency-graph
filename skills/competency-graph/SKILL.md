@@ -78,6 +78,18 @@ Check `python3 -c "import yaml"` works before running scripts. If PyYAML is miss
 - **Never put working files or outputs in the graph folders.** The checker warns (`folder`) about competency or sector notes outside their configured folders.
 - **Changing a folder later:** move the files (with `git mv` in a git vault), then edit the config, then run the checker. Links resolve by filename, so moving notes doesn't break them.
 
+**Nothing of the owner's is ever saved in the plugin.** This skill's own folder is replaced whenever the plugin updates, so it is read only: the framework library it ships (`assets/frameworks/`) is never edited, and the scripts refuse a setting or an output that points inside it. What an owner adds lives in their own files:
+
+| What they add | Where it is saved |
+|---|---|
+| Personal competencies, sectors, evidence | Notes in their vault, in the folders above |
+| Their own frameworks: a framework the library lacks, a firm's own, their own methods and tools, or their own wording for a shipped framework | Their own frameworks folder: `ownFrameworks` in the config, else `<graphRoot>/Frameworks`. `frameworks.py new <id> --name "…"` starts one; `new <id> --from <id>` makes their own edition of a shipped one, which takes its place for them |
+| Job specs | `Job_Specs.yaml` in the competencies folder (`jobSpecs`) |
+| Which frameworks and pathways they chose, who rates them, dashboard settings | `competency-graph.yaml` |
+| Thresholds, conventions and the decision log | Their profile |
+
+A framework that other owners could use can be offered to the plugin's library through its repository; until a release ships it, it works from the owner's own folder.
+
 ## Building a graph
 
 The order matters: a thin slice proves the method on real material before the owner invests in the whole tree.
@@ -160,6 +172,7 @@ python3 $S/query_graph.py    tree [<competency>] [--depth N]
 python3 $S/query_graph.py    framework "RICS APC" [--links]                      # every competency mapped to a framework
 python3 $S/claims_plan.py     --from <exported claims folder> [--out plan.yaml]   # dashboard changes -> edit_links plan
 python3 $S/frameworks.py      list [--all] | build [--out FILE] | apply --from DIR [--apply]   # the library; requirements file; dashboard selection -> config
+python3 $S/frameworks.py      new ID --name "Name" [--no-pathways] | new ID --from LIBRARY_ID   # start an own framework, or an own edition of a shipped one, in the owner's files
 python3 $S/assessors.py       list | apply --from DIR [--apply]                    # who rates the owner; the list saved on the dashboard -> config
 python3 $S/job_specs.py       list | check | build | score <id> [--basis claimed|assessed|supported] | merge --from DIR [--apply]
 python3 $S/dashboard_build.py [--out DIR] [--disclosure on-request|public] [--one-file]   # the whole dashboard from the files: page (in parts), data, manifest
